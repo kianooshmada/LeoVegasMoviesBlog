@@ -43,16 +43,6 @@ const getSocialNetworkIcon = (type: SocialNetworkTypes) => {
           title="pintrest"
         />
       );
-
-    case SocialNetworkTypes.TELEGRAM:
-      return (
-        <SVG
-          src="/images/social-networks/telegram.svg"
-          width={24}
-          height="auto"
-          title="pintrest"
-        />
-      );
     case SocialNetworkTypes.WHATSAPP:
       return <WhatsAppOutlined />;
   }

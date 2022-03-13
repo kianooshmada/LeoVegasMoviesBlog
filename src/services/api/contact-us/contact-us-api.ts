@@ -1,14 +1,13 @@
-import HttpClient from '../../../utils/http-client';
 import { ContactUsInfoMapper } from './contact-us-mapper';
 import { ContactUsGetInfoResponse } from './responses/contact-us-get-info-response';
-
+import data from '../../../data';
 export class ContactUsApi {
   static getInfo = async (): Promise<ContactUsGetInfoResponse> => {
     try {
-      const res = await HttpClient.get('/ContactUsInfo/GetContactUsInfo');
-      const data = res.data;
-      const response: ContactUsGetInfoResponse = ContactUsInfoMapper(data);
-
+      const response: ContactUsGetInfoResponse = {
+        email: data.email,
+        phone: data.phone,
+      };
       return Promise.resolve(response);
     } catch (e) {
       return Promise.reject(e);

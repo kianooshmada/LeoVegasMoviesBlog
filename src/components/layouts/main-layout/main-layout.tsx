@@ -19,7 +19,6 @@ type Props = {
 
 const MainLayout = ({ children, data }: Props) => {
   const [layoutData, setLayoutData] = useState(data);
-
   useEffect(() => {
     if (data) {
       setLayoutData(data);
@@ -40,8 +39,8 @@ const MainLayout = ({ children, data }: Props) => {
 
 MainLayout.loadData = async (): Promise<MainLayoutData> => {
   try {
-    const socialNetworks = await SocialNetworkApi.getList();
     const contactUsInfo = await ContactUsApi.getInfo();
+    const socialNetworks = await SocialNetworkApi.getList();
     const output: MainLayoutData = { socialNetworks, contactUsInfo };
     return Promise.resolve(output);
   } catch (error) {
