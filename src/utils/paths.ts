@@ -1,3 +1,4 @@
+import { MovieBaseInterface } from '../models/movie/movie-base-interface';
 class Uri {
   url: string;
   route: string;
@@ -56,6 +57,17 @@ class Paths {
 
     static password() {
       return new Uri(this.base + '/password');
+    }
+  };
+
+  static movie = class {
+    static base = '/movie';
+    static list(pageNumber: number = 1) {
+      return new Uri(this.base + (pageNumber > 1 ? '?page=' + pageNumber : ''));
+    }
+
+    static detail(data: MovieBaseInterface) {
+      return new Uri(`${this.base}/${data.id}/${slugify(data.title)}`);
     }
   };
 }

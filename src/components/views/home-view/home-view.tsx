@@ -27,6 +27,10 @@ const HomeView = ({ introduction }: Props) => {
           </S.BlockFooter>
         </S.BlockContent>
       </S.Block>
+      <S.Block>
+        <S.BlockTitle>Movies List</S.BlockTitle>
+        <S.BlockContent>movie....</S.BlockContent>
+      </S.Block>
     </>
   );
 };
