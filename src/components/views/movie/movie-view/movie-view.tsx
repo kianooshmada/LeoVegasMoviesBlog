@@ -14,6 +14,7 @@ type Props = {
   list: ListInterface<MovieBaseInterface> | null;
 };
 const NewsView = ({ page, list }: Props) => {
+  console.log(list?.results);
   const router = useRouter();
   const [pageNumber, setPageNumber] = useState<number>(page);
   const onPageChange = (pageNumber: number) => {
@@ -25,55 +26,39 @@ const NewsView = ({ page, list }: Props) => {
     setPageNumber(page);
   }, [page]);
 
-  // function createPost() {
-  //   HttpClient.post('https://back.gpvisaland.com/api/ContactUsRequest/add', {
-  //     fullName: 'kia',
-  //     phone: 'kia',
-  //     email: 'kia@gmail.com',
-  //     subject: 'kia',
-  //     message: 'ds',
-  //   })
-  //     .then(function (response) {
-  //       console.log('done:' + response);
-  //     })
-  //     .catch(function (error) {
-  //       console.log('error:' + error);
-  //     });
-  // }
-
   return (
     <>
-      <S.Cover>
-        <S.CoverImage src="/images/news-cover.jpg" alt="news cover" />
-      </S.Cover>
       <S.Title>Movies</S.Title>
       <S.Content>
         <S.List>
-          {/* {list?.items?.length ? (
-            list.items.map((data) => (
+          {list?.results?.length ? (
+            list.results.map((data) => (
               <S.Item key={data.id}>
-                <NavigationLink href={Paths.news.detail(data).getPath()}>
-                  <S.ItemContent href={Paths.news.detail(data).getPath()}>
+                <NavigationLink href={Paths.movie.detail(data).getPath()}>
+                  <S.ItemContent href={Paths.movie.detail(data).getPath()}>
                     <S.ItemPhotoWrap>
-                      <S.ItemPhoto src={data.thumnail} alt={data.title} />
+                      <S.ItemPhoto
+                        src={GlobalConstant.POSTER_PATH_URL + data.poster_path}
+                        alt={data.title}
+                      />
                     </S.ItemPhotoWrap>
                     <S.ItemText>{data.title}</S.ItemText>
-                    <S.ItemDate>{data.date || '-'}</S.ItemDate>
-                    <S.ItemSummary>{data.summary}</S.ItemSummary>
+                    <S.ItemDate>{data.release_date || '-'}</S.ItemDate>
+                    {/*<S.ItemSummary>{data.summary}</S.ItemSummary> */}
                   </S.ItemContent>
                 </NavigationLink>
               </S.Item>
             ))
           ) : (
             <EmptyMessage />
-          )} */}
+          )}
         </S.List>
         <S.Pager
           as={Pagination}
           current={pageNumber}
           showSizeChanger={false}
           pageSize={GlobalConstant.PAGE_SIZE}
-          total={list?.totalCount || 0}
+          total={list?.total_results || 0}
           hideOnSinglePage={true}
           onChange={onPageChange}
         />

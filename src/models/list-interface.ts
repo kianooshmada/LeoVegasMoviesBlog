@@ -1,6 +1,6 @@
 export interface ListInterface<TYPE> {
-  totalCount: number;
-  items: TYPE[];
+  total_results: number;
+  results: TYPE[];
 }
 
 export const listAdapter = <TYPE>(
@@ -9,8 +9,11 @@ export const listAdapter = <TYPE>(
 ): ListInterface<TYPE> | null => {
   if (input) {
     const output: ListInterface<TYPE> = {
-      totalCount: input.totalCount || 0,
-      items: input.list instanceof Array ? input.list.map(listItemAdapter) : [],
+      total_results: input.total_results || 0,
+      results:
+        input.results instanceof Array
+          ? input.results.map(listItemAdapter)
+          : [],
     };
     return output;
   }

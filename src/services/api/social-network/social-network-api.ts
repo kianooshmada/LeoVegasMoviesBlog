@@ -8,7 +8,6 @@ export class SocialNetworkApi {
       const response: SocialNetworkGetListResponse =
         list.map(socialNetworkMapper);
 
-      console.log(response);
       return Promise.resolve(response);
     } catch (e) {
       return Promise.reject(e);

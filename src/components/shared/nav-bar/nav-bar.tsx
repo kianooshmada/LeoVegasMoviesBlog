@@ -16,6 +16,11 @@ const NavBar = ({ contactUsInfo }: Props) => {
           </NavigationLink>
         </S.Item>
         <S.Item>
+          <NavigationLink href={Paths.movie.list().getPath()}>
+            <S.Button href={Paths.movie.list().getPath()}>Movies</S.Button>
+          </NavigationLink>
+        </S.Item>
+        <S.Item>
           <S.Button>Contact Us</S.Button>
           <S.SubMenu>
             <S.SubMenuList>

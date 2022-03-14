@@ -9,7 +9,7 @@ import { MovieApi } from '../../src/services/api/movie/movie-api';
 type Props = {
   detail: MovieInterface;
 };
-const NewsDetailPage = ({ detail }: Props) => {
+const MovieDetailPage = ({ detail }: Props) => {
   return (
     <>
       <PageHead title={detail.title + ' | movie'} />
@@ -44,4 +44,4 @@ export const getServerSideProps = async (
   }
 };
 
-export default NewsDetailPage;
+export default MovieDetailPage;

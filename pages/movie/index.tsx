@@ -13,7 +13,7 @@ type Props = {
   page: number;
   list: ListInterface<MovieBaseInterface> | null;
 };
-const NewsPage = ({ page, list }: Props) => {
+const MoviePage = ({ page, list }: Props) => {
   return (
     <>
       <PageHead title="Movie" />
@@ -38,6 +38,7 @@ export const getServerSideProps = async (
         },
       }),
     ]);
+
     const props: Props = {
       page: page,
       list: movieRes,
@@ -50,4 +51,4 @@ export const getServerSideProps = async (
   }
 };
 
-export default NewsPage;
+export default MoviePage;

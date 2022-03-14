@@ -5,7 +5,6 @@ import NavigationLink from '../navigation-link';
 import * as S from './footer.styled';
 import { SocialNetworkTypes } from '../../../models/social-network/social-network-types';
 import SVG from 'react-inlinesvg';
-
 import {
   FacebookOutlined,
   GooglePlusOutlined,
