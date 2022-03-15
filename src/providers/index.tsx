@@ -7,7 +7,7 @@ type Props = {
 };
 const RootProvider = ({ children }: Props) => {
   return (
-    <ConfigProvider direction="rtl">
+    <ConfigProvider direction="ltr">
       <ThemeProvider>{children}</ThemeProvider>
     </ConfigProvider>
   );

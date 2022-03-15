@@ -31,30 +31,6 @@ export const Content = styled.div`
   margin-top: 0;
 `;
 
-type BlockType = {
-  $hasBack?: boolean;
-};
-
-export const Block = styled.section<BlockType>`
-  padding-top: ${({ theme }) => theme.dimensions.x6};
-  padding-bottom: ${({ theme }) => theme.dimensions.x6};
-  padding-right: ${({ theme }) => theme.defaults.gutter};
-  padding-left: ${({ theme }) => theme.defaults.gutter};
-
-  background-color: ${({ theme, $hasBack }) =>
-    $hasBack ? theme.palette.back : null};
-`;
-
-export const BlockTitle = styled.h2`
-  text-align: center;
-  font-size: 24px;
-  font-weight: bold;
-`;
-
-export const TextboxIcon = styled.span`
-  opacity: 0.5;
-`;
-
 export const List = styled.ul`
   display: flex;
   margin: 0;

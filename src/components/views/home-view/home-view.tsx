@@ -1,13 +1,18 @@
-import { Button, Carousel } from 'antd';
+import { Button } from 'antd';
 import React from 'react';
 import Paths from '../../../utils/paths';
 import NavigationLink from '../../shared/navigation-link';
 import * as S from './home-view.styled';
+import { MovieBaseInterface } from '../../../models/movie/movie-base-interface';
+import { ListInterface } from '../../../models/list-interface';
+import NowPlayingMovies from '../../shared/now-playing-movies';
 
 type Props = {
   introduction: string;
+  list: ListInterface<MovieBaseInterface> | null;
+  page: number;
 };
-const HomeView = ({ introduction }: Props) => {
+const HomeView = ({ introduction, list, page }: Props) => {
   return (
     <>
       <S.Block $hasBack={true}>
@@ -28,8 +33,8 @@ const HomeView = ({ introduction }: Props) => {
         </S.BlockContent>
       </S.Block>
       <S.Block>
-        <S.BlockTitle>Movies List</S.BlockTitle>
-        <S.BlockContent>movie....</S.BlockContent>
+        <S.BlockTitle as="h1">Now Playing Movies</S.BlockTitle>
+        <NowPlayingMovies page={page} list={list} />
       </S.Block>
     </>
   );

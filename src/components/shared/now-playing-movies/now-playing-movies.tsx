@@ -1,51 +1,32 @@
-import { Pagination, Input, Space } from 'antd';
 import { useRouter } from 'next/router';
 import React, { useState, useEffect } from 'react';
-import { GlobalConstant } from '../../../../constants/page-size';
-import { ListInterface } from '../../../../models/list-interface';
-import { MovieBaseInterface } from '../../../../models/movie/movie-base-interface';
-import Paths from '../../../../utils/paths';
-import EmptyMessage from '../../../shared/empty-message';
-import NavigationLink from '../../../shared/navigation-link';
-import * as S from './movie-view.styled';
+import { GlobalConstant } from '../../../constants/page-size';
+import { ListInterface } from '../../../models/list-interface';
+import { MovieBaseInterface } from '../../../models/movie/movie-base-interface';
+import Paths from '../../../utils/paths';
+import EmptyMessage from '../../shared/empty-message';
+import NavigationLink from '../../shared/navigation-link';
+import * as S from './now-playing-movies.styled';
+import { Pagination } from 'antd';
 type Props = {
   page: number;
   list: ListInterface<MovieBaseInterface> | null;
 };
-const MoviesView = ({ page, list }: Props) => {
-  const { Search } = Input;
-
+const NowPlayingMovies = ({ page, list }: Props) => {
   const router = useRouter();
   const [pageNumber, setPageNumber] = useState<number>(page);
-  const [primaryReleaseYear, setPrimaryReleaseYear] = useState<number>(0);
   const onPageChange = (pageNumber: number) => {
     setPageNumber(pageNumber);
-    router.push(Paths.movie.list(pageNumber, primaryReleaseYear).getPath());
+    router.push(Paths.movie.nowPlayingList(pageNumber).getPath());
   };
 
-  const onSearch = (release_year: number) => {
-    setPrimaryReleaseYear(release_year);
-    router.push(Paths.movie.list(page, primaryReleaseYear).getPath());
-  };
   useEffect(() => {
     setPageNumber(page);
   }, [page]);
 
   return (
     <>
-      <S.Title>All Movies</S.Title>
       <S.Content>
-        <S.Block>
-          <Space direction="vertical">
-            <Search
-              placeholder="input movie title"
-              allowClear
-              enterButton="Search"
-              size="large"
-              onSearch={onSearch}
-            />
-          </Space>
-        </S.Block>
         <S.List>
           {list?.results?.length ? (
             list.results.map((data) => (
@@ -82,4 +63,4 @@ const MoviesView = ({ page, list }: Props) => {
   );
 };
 
-export default MoviesView;
+export default NowPlayingMovies;

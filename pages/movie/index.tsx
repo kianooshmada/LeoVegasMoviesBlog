@@ -28,10 +28,11 @@ export const getServerSideProps = async (
   try {
     const query: any = context.query;
     const page = parseInt(query?.page || 1);
-
+    const year = parseInt(query?.year || 0);
     const [movieRes] = await Promise.all([
       MovieApi.list({
         pageNumber: page,
+        primary_release_year: year,
         pageSize: GlobalConstant.PAGE_SIZE,
         config: {
           headers: authHeader(context.req),

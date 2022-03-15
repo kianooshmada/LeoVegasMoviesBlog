@@ -4,7 +4,6 @@ import { MovieInterface } from '../../../models/movie/movie-interface';
 import { MovieBaseInterface } from '../../../models/movie/movie-base-interface';
 import { movieMapper } from './movie-mapper';
 import { movieBaseMapper } from './movie-mapper';
-import { MovieGetListResponse } from './responses/movie-get-list-response';
 import { ListRequestBase } from '../infrastructure/list-request-base';
 import { listAdapter, ListInterface } from '../../../models/list-interface';
 export class MovieApi {
@@ -12,14 +11,14 @@ export class MovieApi {
     request: ListRequestBase
   ): Promise<ListInterface<MovieBaseInterface> | null> => {
     try {
-      //const query = `?pageNumber=${request.pageNumber}&pagesize=${request.pageSize}`;
-      const query = `?page=${request.pageNumber}`;
+      let query = `?page=${request.pageNumber}`;
+      if (request.primary_release_year != null) {
+        query += `&primary_release_year=${request.primary_release_year}`;
+      }
       const res: any = await HttpClient.get(
         '/discover/movie' + query,
         request.config
       );
-
-      console.log(res.data);
 
       const data: any = res.data;
       const output: ListInterface<MovieBaseInterface> | null = listAdapter(
@@ -41,23 +40,31 @@ export class MovieApi {
       );
       const output = movieMapper(res.data);
 
-      console.log(output);
-
       return Promise.resolve(output);
     } catch (e) {
       return Promise.reject(e);
     }
   };
 
-  // static getTopList = async (): Promise<MovieGetListResponse> => {
-  //   try {
-  //     const res = await HttpClient.get('/discover/movie');
-  //     const list: any[] = res.data;
-  //     const response: MovieGetListResponse = list.map(movieBaseMapper);
+  static getNowPalyingList = async (
+    request: ListRequestBase
+  ): Promise<ListInterface<MovieBaseInterface> | null> => {
+    try {
+      const query = `?page=${request.pageNumber}`;
+      const res: any = await HttpClient.get(
+        '/movie/now_playing' + query,
+        request.config
+      );
 
-  //     return Promise.resolve(response);
-  //   } catch (e) {
-  //     return Promise.reject(e);
-  //   }
-  // };
+      const data: any = res.data;
+      const output: ListInterface<MovieBaseInterface> | null = listAdapter(
+        data,
+        movieBaseMapper
+      );
+
+      return Promise.resolve(output);
+    } catch (e) {
+      return Promise.reject(e);
+    }
+  };
 }

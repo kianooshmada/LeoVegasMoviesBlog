@@ -62,12 +62,26 @@ class Paths {
 
   static movie = class {
     static base = '/movie';
-    static list(pageNumber: number = 1) {
-      return new Uri(this.base + (pageNumber > 1 ? '?page=' + pageNumber : ''));
+
+    static list(pageNumber: number = 1, primary_release_year: number = 0) {
+      return new Uri(
+        this.base +
+          (pageNumber > 1
+            ? '?page=' +
+              pageNumber +
+              (primary_release_year > 0 ? '&year=' + primary_release_year : '')
+            : primary_release_year > 0
+            ? '?year=' + primary_release_year
+            : '')
+      );
     }
 
     static detail(data: MovieBaseInterface) {
       return new Uri(`${this.base}/${data.id}/${slugify(data.title)}`);
+    }
+
+    static nowPlayingList(pageNumber: number = 1) {
+      return new Uri(pageNumber > 1 ? '?page=' + pageNumber : '');
     }
   };
 }
