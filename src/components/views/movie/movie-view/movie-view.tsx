@@ -23,7 +23,7 @@ const MoviesView = ({ page, list }: Props) => {
     router.push(Paths.movie.list(pageNumber, primaryReleaseYear).getPath());
   };
 
-  const onSearch = (release_year: number) => {
+  const onSearch = (release_year: any) => {
     setPrimaryReleaseYear(release_year);
     router.push(Paths.movie.list(page, primaryReleaseYear).getPath());
   };
@@ -38,7 +38,7 @@ const MoviesView = ({ page, list }: Props) => {
         <S.Block>
           <Space direction="vertical">
             <Search
-              placeholder="input movie title"
+              placeholder="input release year"
               allowClear
               enterButton="Search"
               size="large"

@@ -6,6 +6,8 @@ import { movieMapper } from './movie-mapper';
 import { movieBaseMapper } from './movie-mapper';
 import { ListRequestBase } from '../infrastructure/list-request-base';
 import { listAdapter, ListInterface } from '../../../models/list-interface';
+import { WatchLaterRequest } from './requests/watch-later-request';
+import { AddToFavoriteListRequest } from './requests/add-to-favorite-list-request';
 export class MovieApi {
   static list = async (
     request: ListRequestBase
@@ -63,6 +65,28 @@ export class MovieApi {
       );
 
       return Promise.resolve(output);
+    } catch (e) {
+      return Promise.reject(e);
+    }
+  };
+
+  static watchLater = async (request: WatchLaterRequest): Promise<any> => {
+    try {
+      console.log(request);
+      const res = await HttpClient.post('/account/1/watchlist', request);
+      return Promise.resolve(res);
+    } catch (e) {
+      return Promise.reject(e);
+    }
+  };
+
+  static addToFavoriteList = async (
+    request: AddToFavoriteListRequest
+  ): Promise<any> => {
+    try {
+      console.log(request);
+      const res = await HttpClient.post('/account/1/favorite', request);
+      return Promise.resolve(res);
     } catch (e) {
       return Promise.reject(e);
     }
