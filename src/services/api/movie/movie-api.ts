@@ -72,8 +72,7 @@ export class MovieApi {
 
   static watchLater = async (request: WatchLaterRequest): Promise<any> => {
     try {
-      console.log(request);
-      const res = await HttpClient.post('/account/1/watchlist', request);
+      const res = await HttpClient.post('/account/watchlist', request);
       return Promise.resolve(res);
     } catch (e) {
       return Promise.reject(e);
@@ -84,8 +83,7 @@ export class MovieApi {
     request: AddToFavoriteListRequest
   ): Promise<any> => {
     try {
-      console.log(request);
-      const res = await HttpClient.post('/account/1/favorite', request);
+      const res = await HttpClient.post('/account/favorite', request);
       return Promise.resolve(res);
     } catch (e) {
       return Promise.reject(e);
